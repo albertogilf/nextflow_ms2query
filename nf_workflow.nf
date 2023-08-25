@@ -35,7 +35,7 @@ process processMS2query {
     }
     """    
     ms2query ${commandline_call}
-    zip -r ms2queryresults.zip ${params.publishdir}" 
+    
     """
 }
 
