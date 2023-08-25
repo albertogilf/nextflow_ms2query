@@ -43,7 +43,7 @@ parameterlist:
     - displayname: Ionization mode
       paramtype: select
       nf_paramname: ion_mode
-      formvalue: "0.005"
+      formvalue: "positive"
       options:
         - value: "positive"
           display: positive
@@ -53,7 +53,7 @@ parameterlist:
     - displayname: Filter spectra based on the ionization mode
       paramtype: select
       nf_paramname: ion_mode_exclusion
-      formvalue: "no"
+      formvalue: "yes"
       options:
         - value: "yes"
           display: yes
