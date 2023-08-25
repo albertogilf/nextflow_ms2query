@@ -59,3 +59,12 @@ parameterlist:
           display: yes
         - value: "no"
           display: no
+
+    - displayname: Additional metadata columns from the experimental data (.mgf) in your results file (.csv)
+      paramtype: text
+      nf_paramname: additional_medadata
+      formplaceholder: retention_time feature_id etc...
+      formvalue: "retention_time feature_id"
+      tooltip: "Enter the additional metadata columns from the experimental data (.mgf) in your results file (.csv) separated by spaces"
+
+          

@@ -3,7 +3,7 @@
 To test the workflow the next command should be executed:
 
 ```
-make run [-e --spectra ${spectra_path} --library ${library_path} --ionmode (positive/negative) ${ion_mode} --download (yes/no) ${download} --ion_mode_exclusion (yes/no) ${ion_mode_exclusion}]
+make run [-e --spectra ${spectra_path} --library ${library_path} --ionmode (positive/negative) ${ion_mode} --additional_metadata ${additional_metadata} --download (yes/no) ${download} --ion_mode_exclusion (yes/no) ${ion_mode_exclusion}]
 ```
 
 For documentation about the ms2query tool, please read the ms2query [user guide](https://github.com/iomega/ms2query/),
@@ -44,7 +44,7 @@ conda activate ms2query-env
 
 
 ```
-nextflow [options] ./nf_workflow.nf --spectra ${spectra_path} --library ${library_path} --ionmode (positive/negative) ${ion_mode} --download (yes/no) ${download} --ion_mode_exclusion (yes/no) ${ion_mode_exclusion}]
+nextflow [options] ./nf_workflow.nf --spectra ${spectra_path} --library ${library_path} --ionmode (positive/negative) ${ion_mode} --additional_metadata ${additional_metadata} --download (yes/no) ${download} --ion_mode_exclusion (yes/no) ${ion_mode_exclusion}]
 ```
 
 
