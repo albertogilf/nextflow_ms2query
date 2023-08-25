@@ -1,83 +1,53 @@
-# Nextflow Template
+# ms2query Nextflow
 
-To run the workflow to test simply do
+To test the workflow the next command should be executed:
 
 ```
-make run
+make run [-e --spectra ${spectra_path} --library ${library_path} --ionmode (positive/negative) ${ion_mode} --download (yes/no) ${download} --ion_mode_exclusion (yes/no) ${ion_mode_exclusion}]
 ```
+
+For documentation about the ms2query tool, please read the ms2query [user guide](https://github.com/iomega/ms2query/),
+
+All the input parameters are mandatory. For using new models, please check [https://github.com/iomega/ms2query#Create-your-own-library-and-train-new-models](https://github.com/iomega/ms2query#Create-your-own-library-and-train-new-models)
 
 To learn NextFlow checkout this documentation:
 
 https://www.nextflow.io/docs/latest/index.html
 
-## Installation
+## Parameters in nextflow 
 
-You will need to have conda, mamba, and nextflow installed to run things locally. 
+The parameters in nextflow follow the next priority:
 
-## GNPS2 Workflow Input information
+i. Parameters specified on the command line (--something value)
+ii. Parameters provided using the -params-file option
+iii. Config file specified using the -c my_config option
+iv. The config file named nextflow.config in the current directory
+v. The config file named nextflow.config in the workflow project directory
+vi. The config file $HOME/.nextflow/config
+vii. Values defined within the pipeline script itself (e.g. main.nf)
 
-Check the definition for the workflow input and display parameters:
-https://wang-bioinformatics-lab.github.io/GNPS2_Documentation/workflowdev/
+In case you wish to set your parameters directly in nextflow, please use the next syntaxis:
 
-
-## Deployment to GNPS2
-
-In order to deploy, we have a set of deployment tools that will enable deployment to the various gnps2 systems. To run the deployment, you will need the following setup steps completed:
-
-1. Checked out of the deployment submodules
-1. Conda environment and dependencies
-1. SSH configuration updated
-
-### Checking out the deployment submodules
-
-use the following commands from the deploy_gnps2 folder. 
-
-You might need to checkout the module, do this by running
 
 ```
-git submodule init
-git submodule update
+nextflow [options] ./nf_workflow.nf --spectra ${spectra_path} --library ${library_path} --ionmode (positive/negative) ${ion_mode} --download (yes/no) ${download} --ion_mode_exclusion (yes/no) ${ion_mode_exclusion}
 ```
 
-You will also need to specify the user on the server that you've been given that your public key has been associated with. If you want to not enter this every time you do a deployment, you can create a Makefile.credentials file in the deploy_gnps2 folder with the following contents
+## Run in a conda environment
+
+To run the workflow in a conda environment, there is a configuration file [conda_env.yml](bin/conda_env.yml). This file configured the environment named ms2query-env. It can be created and activated by:
 
 ```
-USERNAME=<enter the username>
+conda env create -f bin/conda_env.yml
+conda activate ms2query-env
 ```
 
-### Deployment Dependencies
-
-You will need to install the dependencies in GNPS2_DeploymentTooling/requirements.txt on your own local machine. 
-
-One way to do this is to use conda to create an environment, for example:
 
 ```
-conda create -n deploy python=3.8
-pip install -r GNPS2_DeploymentTooling/requirements.txt
+nextflow [options] ./nf_workflow.nf --spectra ${spectra_path} --library ${library_path} --ionmode (positive/negative) ${ion_mode} --download (yes/no) ${download} --ion_mode_exclusion (yes/no) ${ion_mode_exclusion}]
 ```
 
-### SSH Configuration
 
-Also update your ssh config file to include the following ssh target:
+## Deployment in GNPS2
 
-```
-Host ucr-gnps2-dev
-    Hostname ucr-lemon.duckdns.org
-```
-
-### Deploying to Dev Server
-
-To deploy to development, use the following command, if you don't have your ssh public key installed onto the server, you will not be able to deploy.
-
-```
-make deploy-dev
-```
-
-### Deploying to Production Server
-
-To deploy to production, use the following command, if you don't have your ssh public key installed onto the server, you will not be able to deploy.
-
-```
-make deploy-prod
-```
-
+Check [Nexftlow template instructions from Mingxun Wang](https://github.com/Wang-Bioinformatics-Lab/Nextflow_Workflow_Template)

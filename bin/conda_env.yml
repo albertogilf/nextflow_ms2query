@@ -1,9 +1,41 @@
+name: ms2query-env
 channels:
   - conda-forge
   - defaults
 dependencies:
-  - python=3.8.8
-  - pandas
+  - python=3.7
+  - pip>=23.2.1
   - pip:
-    - xmltodict
-    - requests
+    - Cython
+    - h5py
+    - tensorflow-estimator
+    - pubchempy
+    - mpmath
+    - keras
+    - urllib3
+    - tensorboard-data-server
+    - sympy
+    - smart-open
+    - pyparsing
+    - protobuf
+    - pickydict
+    - numpy
+    - humanfriendly
+    - deprecated
+    - python-louvain
+    - pandas
+    - onnx
+    - keras-preprocessing
+    - coloredlogs
+    - onnxruntime
+    - onnxconverter-common
+    - gensim
+    - skl2onnx
+    - matchms>=0.14.0
+    - google-auth-oauthlib
+    - tensorboard
+    - spec2vec
+    - tensorflow
+    - matchmsextras
+    - ms2deepscore
+    - ms2query

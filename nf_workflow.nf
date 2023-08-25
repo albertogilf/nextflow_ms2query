@@ -1,50 +1,49 @@
 #!/usr/bin/env nextflow
 nextflow.enable.dsl=2
 
-params.input = "README.md"
+
+
+params.publishdir = "./nf_output"
+
+// Workflow Boiler Plate
+params.OMETALINKING_YAML = "flow_filelinking.yaml"
+params.OMETAPARAM_YAML = "job_parameters.yaml"
 
 TOOL_FOLDER = "$baseDir/bin"
 
-process processDataPython {
-    publishDir "./nf_output", mode: 'copy'
-
+process processMS2query {
+    publishDir "$params.publishdir", mode: 'copy', overwrite: false
     conda "$TOOL_FOLDER/conda_env.yml"
-
     input:
-    file input 
+    val spectra_path
+    val library_path
+    val download_last_model
+    val ion_mode
+    val ion_mode_exclusion
 
-    output:
-    file 'python_output.tsv'
-
-    """
-    python $TOOL_FOLDER/python_script.py $input python_output.tsv
-    """
-}
-
-process processDataR {
-    publishDir "./nf_output", mode: 'copy'
-
-    conda "$TOOL_FOLDER/conda_env_r.yml"
-
-    input:
-    file input 
-
-    output:
-    file 'R_output.txt'
-    file 'rpy2_output.txt'
-
-    """
-    Rscript  $TOOL_FOLDER/R_script.R
-    python $TOOL_FOLDER/rpy2_script.py
-    """
-}
-
-workflow {
-    data = Channel.fromPath(params.input)
     
-    // Outputting Python
-    processDataPython(data)
+    script: 
 
-    // Outputting R
-    processDataR(data)
+    def commandline_call = "--spectra ${spectra_path} --library ${library_path} --ionmode ${ion_mode}"
+    if (download_last_model == "yes" || download_last_model == "true" ) {
+        commandline_call += " --download"
+    }
+    if (ion_mode_exclusion == "yes" || ion_mode_exclusion == "true") {
+        commandline_call += " --filter_ionmode"
+    }
+
+
+    """    
+    ms2query ${commandline_call}
+    """
+}
+
+
+
+workflow{
+    //ch1 = Channel.fromPath(params.spectra_path) 
+    //ch2 = Channel.fromPath(params.library_path) 
+
+    processMS2query(params.spectra_path, params.library_path, params.download_last_model, params.ion_mode, params.ion_mode_exclusion) 
+    
 }

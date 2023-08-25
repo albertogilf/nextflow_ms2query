@@ -1,6 +1,6 @@
-workflowname: template_nextflow_workflow
-workflowdescription: template_nextflow_workflow
-workflowlongdescription: This is a template nextflow workflow for GNPS2
+workflowname: ms2query_nextflow_workflow
+workflowdescription: ms2query nextflow workflow to execute MS2query
+workflowlongdescription: ms2query nextflow workflow to execute MS2query. It downloads the last model available. All model files can be manually downloaded from https://zenodo.org/record/6124552 for positive mode and https://zenodo.org/record/7104184 for negative mode.
 workflowversion: "0.1"
 workflowfile: nf_workflow.nf
 workflowautohide: false
@@ -10,12 +10,52 @@ parameterlist:
     - displayname: File Selection
       paramtype: section
 
-    - displayname: Input Data Folder
+    - displayname: spectra files
       paramtype: fileselector
-      nf_paramname: input_spectra_folder
-      formplaceholder: Enter the path to data
+      nf_paramname: spectra_path
+      formplaceholder: Enter the path of the file or directory containing the ms2 spectra.  "mzML", "json", "mgf", "msp", "mzxml", "usi" or a pickled matchms object. 
       formvalue: ""
       targettaskfolder: input_spectra
       optional: false
       selectsinglefile: false
-      folderunroll: true
+      folderunroll: false
+
+    - displayname: Download the most up to date model? 
+      paramtype: select
+      nf_paramname: download_last_model
+      formvalue: "yes"
+      options:
+        - value: "yes"
+          display: yes
+        - value: "no"
+          display: no
+
+    - displayname: Library
+      paramtype: fileselector
+      nf_paramname: library_path
+      formplaceholder: Enter the path of the libraries. If you select to download the last up to date model, all of them will be included. 
+      formvalue: ""
+      targettaskfolder: input_library
+      optional: true
+      selectsinglefile: false
+      folderunroll: false
+
+    - displayname: Ionization mode
+      paramtype: select
+      nf_paramname: ion_mode
+      formvalue: "0.005"
+      options:
+        - value: "positive"
+          display: positive
+        - value: "negative"
+          display: negative
+
+    - displayname: Filter spectra based on the ionization mode
+      paramtype: select
+      nf_paramname: ion_mode_exclusion
+      formvalue: "no"
+      options:
+        - value: "yes"
+          display: yes
+        - value: "no"
+          display: no
