@@ -23,7 +23,7 @@ process processMS2query {
     val additional_metadata
 
     output:
-    path "ms2queryresults.zip", emit: zip
+    path "*.csv", emit: annotations
     
     script: 
     def commandline_call = "--spectra ${spectra_path} --library ${library_path} --ionmode ${ion_mode} --additional_metadata ${additional_metadata} --results ${params.publishdir}"
