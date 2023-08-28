@@ -22,8 +22,6 @@ process processMS2query {
     val ion_mode_exclusion
     val additional_metadata
 
-    output:
-    path '*.csv', emit: annotations
     
     script: 
     def commandline_call = "--spectra ${spectra_path} --library ${library_path} --ionmode ${ion_mode} --additional_metadata ${additional_metadata} --results ${params.publishdir}"

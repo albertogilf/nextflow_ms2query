@@ -1,10 +1,3 @@
 name: ms2query_nextflow_workflow
 displayname: results
-Views:
--   name: results zip file
-    displayname: results zip file
-    viewname: results_zip_file
-    displaytype: download
-    parameters:
-        filename: nf_output/ms2queryresults.zip
-            
+
