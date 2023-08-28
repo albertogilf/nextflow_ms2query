@@ -12,7 +12,7 @@ params.OMETAPARAM_YAML = "job_parameters.yaml"
 TOOL_FOLDER = "$baseDir/bin"
 
 process processMS2query {
-    publishDir "$params.publishdir", mode: 'copy', overwrite: false
+    publishDir "$params.publishdir", mode: 'copy'
     conda "$TOOL_FOLDER/conda_env.yml"
     input:
     val spectra_path
@@ -23,7 +23,7 @@ process processMS2query {
     val additional_metadata
 
     output:
-    path "*.csv", emit: annotations
+    path '*.csv', emit: annotations
     
     script: 
     def commandline_call = "--spectra ${spectra_path} --library ${library_path} --ionmode ${ion_mode} --additional_metadata ${additional_metadata} --results ${params.publishdir}"
@@ -35,7 +35,6 @@ process processMS2query {
     }
     """    
     ms2query ${commandline_call}
-    
     """
 }
 
