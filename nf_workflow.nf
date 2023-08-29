@@ -24,6 +24,7 @@ process processMS2query {
 
     output:
     path 'results/*.csv', emit: annotations
+    path 'ms2query_results.zip', emit: compressed_results
     
     script: 
     def commandline_call = "--spectra ${spectra_path} --library ${library_path} --ionmode ${ion_mode} --additional_metadata ${additional_metadata} --results ./results"
@@ -35,6 +36,7 @@ process processMS2query {
     }
     """    
     ms2query ${commandline_call}
+    zip -r ms2query_results.zip ./results
     """
 }
 

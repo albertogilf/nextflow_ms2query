@@ -40,3 +40,4 @@ dependencies:
     - matchmsextras
     - ms2deepscore
     - ms2query
+    - zip
