@@ -168,4 +168,3 @@ dependencies:
       - wrapt==1.15.0
       - yapf==0.40.1
       - zipp==3.16.2
-      - zip 
