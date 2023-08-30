@@ -18,7 +18,7 @@ parameterlist:
       targettaskfolder: input_spectra
       optional: false
       selectsinglefile: false
-      folderunroll: false
+      folderunroll: true
 
     - displayname: Download the most up to date model? 
       paramtype: select
@@ -38,7 +38,7 @@ parameterlist:
       targettaskfolder: input_library
       optional: true
       selectsinglefile: false
-      folderunroll: false
+      folderunroll: true
 
     - displayname: Ionization mode
       paramtype: select
