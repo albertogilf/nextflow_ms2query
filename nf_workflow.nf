@@ -13,7 +13,7 @@ TOOL_FOLDER = "$baseDir/bin"
 
 process processMS2query {
     publishDir "$params.publishdir", mode: 'copy'
-    conda "https://raw.githubusercontent.com/albertogilf/nextflow_ms2query/master/bin/conda_env.yml"
+    conda "https://raw.githubusercontent.com/iomega/ms2query/main/environment.yml"
     input:
     val spectra_path
     val library_path
