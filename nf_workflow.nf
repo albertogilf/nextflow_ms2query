@@ -25,12 +25,13 @@ process processMS2query {
     path 'ms2query_results.zip', emit: compressed_results
     
     script: 
-    def library = ${library_path}
+    def library = library_path
+    def ion_mode_tmp = ion_mode
     if (library == "default") {
-        if(ion_mode == "positive") {
+        if(ion_mode_tmp == "positive") {
             library = "USERUPLOAD/shared/ms2query/positiveim_model"
         }
-        else if(ion_mode == "negative") {
+        else if(ion_mode_tmp == "negative") {
             library = "USERUPLOAD/shared/ms2query/negativeim_model"
         }
     }

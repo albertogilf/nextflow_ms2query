@@ -40,7 +40,7 @@ parameterlist:
       formvalue: "retention_time feature_id"
       tooltip: "Enter the additional metadata columns from the experimental data (.mgf) in your results file (.csv) separated by spaces"
 
-
+    # If the library wants to be set, we can add the parameter. Right now it has default parameters
     # - displayname: Library
     #   paramtype: fileselector
     #   nf_paramname: library_path
