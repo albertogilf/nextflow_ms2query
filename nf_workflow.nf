@@ -37,7 +37,7 @@ process processMS2query {
     }
     def commandline_call = "--spectra ${spectra_path} --library ${library} --ionmode ${ion_mode} --additional_metadata ${additional_metadata} --results ./results"
     
-    """    
+    """
     ms2query ${commandline_call}
     zip -r ms2query_results.zip ./results
     """
