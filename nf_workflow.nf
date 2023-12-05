@@ -2,7 +2,7 @@
 nextflow.enable.dsl=2
 
 
-
+params.library_path = "default"
 params.publishdir = "./nf_output"
 
 // Workflow Boiler Plate
@@ -17,9 +17,7 @@ process processMS2query {
     input:
     val spectra_path
     val library_path
-    val download_last_model
     val ion_mode
-    val ion_mode_exclusion
     val additional_metadata
 
     output:
@@ -27,13 +25,17 @@ process processMS2query {
     path 'ms2query_results.zip', emit: compressed_results
     
     script: 
-    def commandline_call = "--spectra ${spectra_path} --library ${library_path} --ionmode ${ion_mode} --additional_metadata ${additional_metadata} --results ./results"
-    if (download_last_model == "yes" || download_last_model == "true" ) {
-        commandline_call += " --download"
+    def library = ${library_path}
+    if (library == "default") {
+        if(ion_mode == "positive") {
+            library = "USERUPLOAD/shared/ms2query/positiveim_model"
+        }
+        else if(ion_mode == "negative") {
+            library = "USERUPLOAD/shared/ms2query/negativeim_model"
+        }
     }
-    if (ion_mode_exclusion == "yes" || ion_mode_exclusion == "true") {
-        commandline_call += " --filter_ionmode"
-    }
+    def commandline_call = "--spectra ${spectra_path} --library ${library} --ionmode ${ion_mode} --additional_metadata ${additional_metadata} --results ./results"
+    
     """    
     ms2query ${commandline_call}
     zip -r ms2query_results.zip ./results
@@ -43,5 +45,5 @@ process processMS2query {
 
 
 workflow{
-    processMS2query(params.spectra_path, params.library_path, params.download_last_model, params.ion_mode, params.ion_mode_exclusion, params.additional_metadata) 
+    processMS2query(params.spectra_path, params.library_path, params.ion_mode, params.additional_metadata) 
 }

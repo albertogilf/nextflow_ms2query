@@ -6,4 +6,4 @@ Views:
     viewname: ms2query_zip_file
     displaytype: download
     parameters:
-      filename: nf_output/ms2query_results.zip
+      filename: nf_output/ms2query_results.zip 

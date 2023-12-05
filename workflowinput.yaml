@@ -1,11 +1,12 @@
 workflowname: ms2query_nextflow_workflow
 workflowdescription: ms2query nextflow workflow to execute MS2query
-workflowlongdescription: ms2query nextflow workflow to execute MS2query. It downloads the last model available. All model files can be manually downloaded from https://zenodo.org/record/6124552 for positive mode and https://zenodo.org/record/7104184 for negative mode.
+MS2Query uses MS2 mass spectra to find the best match in a library and is able to search for both analogues and exact matches. A pretrained library for MS2Query is available based on the GNPS library.   More information about the method can be found in the paper https://www.nature.com/articles/s41467-023-37446-4 or on the GitHub https://github.com/iomega/ms2query.
+
+
 workflowversion: "0.1"
 workflowfile: nf_workflow.nf
 workflowautohide: false
 adminonly: false
-#This maps the parameters from an input form to those that will appear in nextflow
 parameterlist:
     - displayname: File Selection
       paramtype: section
@@ -13,32 +14,15 @@ parameterlist:
     - displayname: spectra files
       paramtype: fileselector
       nf_paramname: spectra_path
-      formplaceholder: Enter the path of the file or directory containing the ms2 spectra.  "mzML", "json", "mgf", "msp", "mzxml", "usi" or a pickled matchms object. 
+      formplaceholder: Provide a file with MS2 spectra. Allowed formats are mzML, json, mgf, msp, mzxml or usi.
       formvalue: ""
       targettaskfolder: input_spectra
       optional: false
       selectsinglefile: false
       folderunroll: true
 
-    - displayname: Download the most up to date model? 
-      paramtype: select
-      nf_paramname: download_last_model
-      formvalue: "yes"
-      options:
-        - value: "yes"
-          display: yes
-        - value: "no"
-          display: no
 
-    - displayname: Library
-      paramtype: fileselector
-      nf_paramname: library_path
-      formplaceholder: Enter the path of the libraries. If you select to download the last up to date model, all of them will be included. 
-      formvalue: ""
-      targettaskfolder: input_library
-      optional: true
-      selectsinglefile: false
-      folderunroll: true
+
 
     - displayname: Ionization mode
       paramtype: select
@@ -50,15 +34,6 @@ parameterlist:
         - value: "negative"
           display: negative
 
-    - displayname: Filter spectra based on the ionization mode
-      paramtype: select
-      nf_paramname: ion_mode_exclusion
-      formvalue: "yes"
-      options:
-        - value: "yes"
-          display: yes
-        - value: "no"
-          display: no
 
     - displayname: Additional metadata columns from the experimental data (.mgf) in your results file (.csv)
       paramtype: text
@@ -67,4 +42,13 @@ parameterlist:
       formvalue: "retention_time feature_id"
       tooltip: "Enter the additional metadata columns from the experimental data (.mgf) in your results file (.csv) separated by spaces"
 
-          
+
+    # - displayname: Library
+    #   paramtype: fileselector
+    #   nf_paramname: library_path
+    #   formplaceholder: Enter the path of the libraries. Leave it blank to use the default model. 
+    #   formvalue: "default"
+    #   targettaskfolder: input_library
+    #   optional: true
+    #   selectsinglefile: false
+    #   folderunroll: true
