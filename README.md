@@ -1,9 +1,10 @@
 # ms2query Nextflow
 
 To test the workflow the next command should be executed:
+Take into accont that the nextflow in GNPS2 is never downloading the last models by the user. It is maintained by the Wang Bionformatics lab members. 
 
 ```
-make run [-e --spectra ${spectra_path} --library ${library_path} --ionmode (positive/negative) ${ion_mode} --additional_metadata ${additional_metadata} --download (yes/no) ${download} --ion_mode_exclusion (yes/no) ${ion_mode_exclusion}]
+make run [-e --spectra ${spectra_path} --library ${library_path} --ionmode (positive/negative) ${ion_mode} --additional_metadata ${additional_metadata}]
 ```
 
 For documentation about the ms2query tool, please read the ms2query [user guide](https://github.com/iomega/ms2query/),
@@ -30,7 +31,7 @@ In case you wish to set your parameters directly in nextflow, please use the nex
 
 
 ```
-nextflow [options] ./nf_workflow.nf --spectra ${spectra_path} --library ${library_path} --ionmode (positive/negative) ${ion_mode} --download (yes/no) ${download} --ion_mode_exclusion (yes/no) ${ion_mode_exclusion}
+nextflow [options] ./nf_workflow.nf --spectra ${spectra_path} --library ${library_path} --ionmode (positive/negative) ${ion_mode} ${ion_mode_exclusion}
 ```
 
 ## Run in a conda environment
@@ -44,7 +45,7 @@ conda activate ms2query-env
 
 
 ```
-nextflow [options] ./nf_workflow.nf --spectra ${spectra_path} --library ${library_path} --ionmode (positive/negative) ${ion_mode} --additional_metadata ${additional_metadata} --download (yes/no) ${download} --ion_mode_exclusion (yes/no) ${ion_mode_exclusion}]
+nextflow [options] ./nf_workflow.nf --spectra ${spectra_path} --library ${library_path} --ionmode (positive/negative) ${ion_mode} --additional_metadata ${additional_metadata} ]
 ```
 
 
