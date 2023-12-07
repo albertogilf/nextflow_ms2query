@@ -1,7 +1,7 @@
 workflowname: ms2query_nextflow_workflow
 workflowdescription: ms2query workflow to execute MS2query
 workflowlongdescription: MS2Query uses MS2 mass spectra to find the best match in a library and is able to search for both analogues and exact matches. A pretrained library for MS2Query is available based on the GNPS library.   More information about the method can be found in the paper https://www.nature.com/articles/s41467-023-37446-4 or on the GitHub https://github.com/iomega/ms2query.
-workflowversion: "0.1"
+workflowversion: "0.2"
 workflowfile: nf_workflow.nf
 workflowautohide: false
 adminonly: false
@@ -12,15 +12,13 @@ parameterlist:
     - displayname: spectra files
       paramtype: fileselector
       nf_paramname: spectra_path
-      formplaceholder: Provide a file with MS2 spectra. Allowed formats are mzML, json, mgf, msp, mzxml or usi.
+      formplaceholder: Provide a file with MS2 spectra. Allowed formats are mzML, json, mgf, msp, mzxml or usi
       formvalue: ""
       targettaskfolder: input_spectra
       optional: false
       selectsinglefile: false
       folderunroll: true
-
-
-
+      tooltip: "Provide a file with MS2 spectra. Allowed formats are mzML, json, mgf, msp, mzxml or usi"
 
     - displayname: Ionization mode
       paramtype: select
@@ -32,6 +30,17 @@ parameterlist:
         - value: "negative"
           display: negative
 
+    - displayname: Library models. Positive ionization mode by default
+      paramtype: fileselector
+      nf_paramname: library_path
+      formplaceholder: Enter the path of the libraries. Change the library if ionization_mode is used
+      formvalue: "USERUPLOAD/shared/ms2query/positiveim_model"
+      targettaskfolder: input_library
+      optional: true
+      selectsinglefile: false
+      folderunroll: true
+      tooltip: "Change the folder to USERUPLOAD/shared/ms2query/negativeim_model for default models in negative ion mode. USe your own folder with the model files for your specific ones."
+
 
     - displayname: Additional metadata columns from the experimental data (.mgf) in your results file (.csv)
       paramtype: text
@@ -40,13 +49,3 @@ parameterlist:
       formvalue: "retention_time feature_id"
       tooltip: "Enter the additional metadata columns from the experimental data (.mgf) in your results file (.csv) separated by spaces"
 
-    # If the library wants to be set, we can add the parameter. Right now it has default parameters
-    # - displayname: Library
-    #   paramtype: fileselector
-    #   nf_paramname: library_path
-    #   formplaceholder: Enter the path of the libraries. Leave it blank to use the default model. 
-    #   formvalue: "default"
-    #   targettaskfolder: input_library
-    #   optional: true
-    #   selectsinglefile: false
-    #   folderunroll: true
