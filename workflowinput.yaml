@@ -1,6 +1,6 @@
 workflowname: ms2query_nextflow_workflow
 workflowdescription: ms2query workflow to execute MS2query
-workflowlongdescription: MS2Query uses MS2 mass spectra to find the best match in a library and is able to search for both analogues and exact matches. A pretrained library for MS2Query is available based on the GNPS library.   More information about the method can be found in the paper https://www.nature.com/articles/s41467-023-37446-4 or on the GitHub https://github.com/iomega/ms2query.
+workflowlongdescription: MS2Query uses MS2 mass spectra to find the best match in a library and is able to search for both analogues and exact matches. A pretrained library for MS2Query is available based on the GNPS library. Tutorial available at https://wang-bioinformatics-lab.github.io/GNPS2_Documentation/ms2query_doc/
 workflowversion: "0.2"
 workflowfile: nf_workflow.nf
 workflowautohide: false
